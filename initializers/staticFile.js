@@ -55,7 +55,7 @@ module.exports = {
               self.logRequest(file, connection, length, duration, true);
             });
             fileStream.on('error', function(err){
-              api.log(err)
+              api.log('static-file', err)
             });
             callback(connection, null, fileStream, mime, length);
           }
@@ -96,13 +96,15 @@ module.exports = {
       },
 
       logRequest: function(file, connection, length, duration, success){
-        api.log('[ file @ ' + connection.type + ' ]', 'debug', {
-          to: connection.remoteIP,
+        var staticDetails = {
+          connection: connection.type 
+          to: connection.remoteIP
           file: file,
           size: length,
           duration: duration,
           success: success
-        });
+        }
+        api.log('static-file', staticDetails, 'debug');
       }
 
     }

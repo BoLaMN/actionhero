@@ -19,9 +19,9 @@ var task = {
 
     var actionProcessor = new api.actionProcessor(connection, function(data){
       if(data.response.error){
-        api.log('task error: ' + data.response.error, 'error', {params: JSON.stringify(params)});
+        api.log('task', 'error: ' + data.response.error, 'error', {params: JSON.stringify(params)});
       } else {
-        api.log('[ action @ task ]', 'debug', {params: JSON.stringify(params)});
+        api.log('task', 'action', 'debug', {params: JSON.stringify(params)});
       }
 
       connection.destroy(function(){

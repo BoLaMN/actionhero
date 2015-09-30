@@ -44,7 +44,7 @@ module.exports = {
       }
 
       for(var m in extraMessages){
-        api.log(extraMessages[m], severity);
+        api.log('exceptions', extraMessages[m], severity);
       }
       var lines;
       try{
@@ -54,9 +54,9 @@ module.exports = {
       }
       for(var l in lines){
         var line = lines[l];
-        api.log('! ' + line, severity);
+        api.log('exceptions', line, severity);
       }
-      api.log('*', severity);
+      api.log('exceptions', '*', severity);
     }
 
     api.exceptionHandlers.reporters.push(consoleReporter);

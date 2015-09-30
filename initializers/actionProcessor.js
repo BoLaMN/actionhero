@@ -130,7 +130,7 @@ module.exports = {
         }
       }
 
-      api.log('[ action @ ' + self.connection.type + ' ]', logLevel, logLine);
+      api.log('action', self.connection.type, logLevel, logLine);
     }
 
     api.actionProcessor.prototype.preProcessAction = function(callback){

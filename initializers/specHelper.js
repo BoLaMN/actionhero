@@ -21,7 +21,7 @@ module.exports = {
         var server = new api.genericServer(type, options, attributes);
 
         server.start = function(next){
-          api.log('loading the testServer', 'warning');
+          api.log('spec-helper', 'loading the testServer', 'warning');
           next();
         }
 
@@ -60,7 +60,7 @@ module.exports = {
               server.sendMessage(connection, response, connection.messageCount);
             }
           }catch(e){
-            api.log(e, 'warning');
+            api.log('spec-helper', e, 'warning');
             server.sendMessage(connection, response, connection.messageCount);
           }
         };

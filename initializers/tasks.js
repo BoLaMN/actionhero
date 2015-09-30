@@ -13,7 +13,7 @@ module.exports = {
         if(!reload){ reload = false }
 
         var loadMessage = function(loadedTaskName){
-          api.log('task ' + (reload?'(re)':'') + 'loaded: ' + loadedTaskName + ', ' + fullFilePath, 'debug');
+          api.log('task', (reload?'(re)':'') + 'loaded: ' + loadedTaskName + ', ' + fullFilePath, 'debug');
         }
 
         api.watchFileAndAct(fullFilePath, function(){
@@ -70,7 +70,7 @@ module.exports = {
 
       validateTask: function(task){
         var fail = function(msg){
-          api.log(msg + '; exiting.', 'emerg');
+          api.log('task', msg + '; exiting.', 'emerg');
         }
         if(typeof task.name !== 'string' || task.name.length < 1){
           fail('a task is missing \'task.name\'');
@@ -171,7 +171,7 @@ module.exports = {
           self.del(task.queue, taskName, {}, function(){
             self.delDelayed(task.queue, taskName, {}, function(){
               self.enqueueIn(task.frequency, taskName, function(){
-                api.log('re-enqueued recurrent job ' + taskName, 'debug');
+                api.log('task', 're-enqueued recurrent job ' + taskName, 'debug');
                 callback();
               });
             });
@@ -190,7 +190,7 @@ module.exports = {
             (function(taskName){
               self.enqueue(taskName, function(err, toRun){
                 if(toRun === true){ 
-                  api.log('enqueuing periodic task: ' + taskName, 'info');
+                  api.log('task', 'enqueuing periodic task: ' + taskName, 'info');
                   loadedTasks.push(taskName);
                 }
                 started--;

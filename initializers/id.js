@@ -15,7 +15,7 @@ module.exports = {
       if(externalIP === false){
         var message = ' * Error fetching this hosts external IP address; setting id base to \'actionhero\''
         try {
-          api.log(message, 'crit');
+          api.log('id', message, 'crit');
         } catch(e){
           console.log(message);
         }
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   start: function(api, next){
-    api.log('server ID: ' + api.id, 'notice');
+    api.log('id', 'server ID: ' + api.id, 'notice');
     next();
   }
 }

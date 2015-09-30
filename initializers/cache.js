@@ -117,7 +117,7 @@ module.exports = {
       }
 
       api.redis.client.get(api.cache.redisPrefix + key, function(err, cacheObj){
-        if(err){ api.log(err, 'error') }
+        if(err){ api.log('cache', err, 'error') }
         try { cacheObj = JSON.parse(cacheObj) } catch(e){}
         if(!cacheObj){
           if(typeof next === 'function'){
@@ -164,7 +164,7 @@ module.exports = {
           if(typeof next === 'function'){ next(new Error('Object Locked')); }
         }else{
           api.redis.client.del(api.cache.redisPrefix + key, function(err, count){
-            if(err){ api.log(err, 'error') }
+            if(err){ api.log('cache', err, 'error') }
             var resp = true;
             if(count !== 1){ resp = false }
             if(typeof next === 'function'){ next(null, resp); }

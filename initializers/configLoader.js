@@ -91,7 +91,7 @@ module.exports = {
     }
 
     var rebootCallback = function(file){
-      api.log('\r\n\r\n*** rebooting due to config change (' + file + ') ***\r\n\r\n', 'info');
+      api.log('config', 'rebooting due to config change (' + file + ')', 'info');
       delete require.cache[require.resolve(file)];
       api.commands.restart.call(api._self);
     }
@@ -214,7 +214,7 @@ module.exports = {
   },
 
   start: function(api, callback){
-    api.log('environment: ' + api.env, 'notice');
+    api.log('config', 'environment: ' + api.env, 'notice');
     callback();
   }
 

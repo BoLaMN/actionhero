@@ -47,7 +47,7 @@ var initialize = function(api, options, next){
       handleDisconnection(rawConnection);
     });
 
-    api.log('webSockets bound to ' + webserver.options.bindIP + ':' + webserver.options.port, 'debug');
+    api.log('websockets', 'bound to ' + webserver.options.bindIP + ':' + webserver.options.port, 'debug');
     server.active = true;
 
     server.writeClientJS();
@@ -98,7 +98,7 @@ var initialize = function(api, options, next){
         server.sendMessage(connection, response, connection.messageCount);
       }
     }catch(e){
-      api.log(e, 'warning');
+      api.log('websockets', e, 'warning');
       server.sendMessage(connection, response, connection.messageCount);
     }
   };
@@ -177,12 +177,12 @@ var initialize = function(api, options, next){
       );
       try{
         fs.writeFileSync(base + '.js', server.renderClientJS(false));
-        api.log('wrote ' + base + '.js', 'debug');
+        api.log('websockets', 'wrote ' + base + '.js', 'debug');
         fs.writeFileSync(base + '.min.js', server.renderClientJS(true));
-        api.log('wrote ' + base + '.min.js', 'debug');
+        api.log('websockets', 'wrote ' + base + '.min.js', 'debug');
       }catch(e){
-        api.log('Cannot write client-side JS for websocket server:', 'warning');
-        api.log(e, 'warning');
+        api.log('websockets', 'Cannot write client-side JS for websocket server:', 'warning');
+        api.log('websockets', e, 'warning');
         throw e;
       }
     }

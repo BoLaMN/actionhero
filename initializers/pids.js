@@ -36,7 +36,7 @@ module.exports = {
       try {
         fs.unlinkSync(api.pids.path + '/' + api.pids.title);
       } catch(e){
-        api.log('unable to remove pidfile', 'error', e);
+        api.log('pids', 'unable to remove pidfile', 'error', e);
       }
     }
 
@@ -45,7 +45,7 @@ module.exports = {
 
   start: function(api, next){
     api.pids.writePidFile();
-    api.log('pid: ' + process.pid, 'notice');
+    api.log('pids', 'pid: ' + process.pid, 'notice');
     next();
   }
 }

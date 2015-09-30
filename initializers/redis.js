@@ -19,7 +19,7 @@ module.exports = {
 
     var redisPackage = require(api.config.redis.package);
     if(api.config.redis.package === 'fakeredis'){
-      api.log('running with fakeredis', 'warning');
+      api.log('redis', 'running with fakeredis', 'warning');
       redisPackage.fast = true;
     }
       
@@ -33,27 +33,27 @@ module.exports = {
       }
       
       api.redis.client.on('error', function(err){
-        api.log('Redis Error (client): ' + err, 'emerg');
+        api.log('redis', 'Redis Error (client): ' + err, 'emerg');
       });
 
       api.redis.subscriber.on('error', function(err){
-        api.log('Redis Error (subscriber): ' + err, 'emerg');
+        api.log('redis', 'Redis Error (subscriber): ' + err, 'emerg');
       });
 
       api.redis.client.on('end', function(){
-        api.log('Redis Connection Closed (client): ', 'debug');
+        api.log('redis', 'Redis Connection Closed (client): ', 'debug');
         api.redis.status.client = false;
       });
 
       api.redis.subscriber.on('end', function(){
-        api.log('Redis Connection Closed (subscriber): ', 'debug');
+        api.log('redis', 'Redis Connection Closed (subscriber): ', 'debug');
         api.redis.status.subscriber = false;
         api.redis.status.subscribed = false;
       });
 
       api.redis.client.on('connect', function(){
         if(api.config.redis.database){ api.redis.client.select(api.config.redis.database); }
-        api.log('connected to redis (client)', 'debug');
+        api.log('redis', 'connected to redis (client)', 'debug');
         api.redis.status.client = true;
         if(api.redis.status.client === true && api.redis.status.subscriber === true && api.redis.status.calledback === false){ 
           api.redis.status.calledback = true;
@@ -63,7 +63,7 @@ module.exports = {
 
       api.redis.subscriber.on('connect', function(){
         // if(api.config.redis.database){ api.redis.subscriber.select(api.config.redis.database); }
-        api.log('connected to redis (subscriber)', 'debug');
+        api.log('redis', 'connected to redis (subscriber)', 'debug');
         api.redis.status.subscriber = true;
         if(api.redis.status.client === true && api.redis.status.subscriber === true && api.redis.status.calledback === false){
           api.redis.status.calledback = true;
@@ -182,7 +182,7 @@ module.exports = {
 
     api.redis.initialize(function(){
       api.redis.subscribe(function(){
-        api.redis.doCluster('api.log', ['actionhero member ' + api.id + ' has joined the cluster'], null, null);
+        api.redis.doCluster('api.log', ['redis', 'actionhero member ' + api.id + ' has joined the cluster'], null, null);
         process.nextTick(next);
       });
     });
@@ -199,7 +199,7 @@ module.exports = {
       delete api.redis.clusterCallbakTimeouts[i]
       delete api.redis.clusterCallbaks[i];
     }
-    api.redis.doCluster('api.log', ['actionhero member ' + api.id + ' has left the cluster'], null, null);
+    api.redis.doCluster('api.log', ['redis', 'actionhero member ' + api.id + ' has left the cluster'], null, null);
     
     process.nextTick(function(){
       api.redis.subscriber.unsubscribe();

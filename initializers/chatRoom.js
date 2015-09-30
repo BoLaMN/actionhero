@@ -286,7 +286,7 @@ module.exports = {
 
     if(api.config.general.startingChatRooms){
       for(var room in api.config.general.startingChatRooms){
-        api.log('ensuring the existence of the chatRoom: ' + room);
+        api.log('chatRoom', 'ensuring the existence of the chatRoom: ' + room);
         api.chatRoom.add(room);
       }
     }

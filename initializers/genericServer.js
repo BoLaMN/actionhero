@@ -76,7 +76,7 @@ module.exports = {
           try {
             connection.sendMessage({welcome: api.config.general.welcomeMessage, context: 'api'})
           } catch(e){
-            api.log(e, 'error');
+            api.log('server', e, 'error');
           }
         }, self.attributes.sendWelcomeMessage);
       }
@@ -112,7 +112,7 @@ module.exports = {
     }
 
     api.genericServer.prototype.log = function(message, severity, data){
-      api.log('[server: ' + this.type + '] ' + message, severity, data);
+      api.log('server', this.type + ' ' + message, severity, data);
     }
 
     var methodNotDefined = function(){
