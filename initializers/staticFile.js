@@ -97,8 +97,8 @@ module.exports = {
 
       logRequest: function(file, connection, length, duration, success){
         var staticDetails = {
-          connection: connection.type 
-          to: connection.remoteIP
+          connection: connection.type,
+          to: connection.remoteIP,
           file: file,
           size: length,
           duration: duration,
